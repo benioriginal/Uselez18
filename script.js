@@ -1,5 +1,5 @@
-let currentIndex = 0;
-const manhwas = [
+
+const manhwass = [
     "Reverse Villain",
     "Solo Leveling",
     "I Shall Live as a Prince",
@@ -932,7 +932,9 @@ const manhwas = [
     "Dreamcide",
     "Zombie Ship"
 ];
-const savedManhwas = [];
+let currentIndex = 0;
+const manhwas = ['SSS Revival Hunter', 'Solo Leveling', 'The Beginning After the End'];
+const savedManhwasKey = 'savedManhwas';
 
 // Fetch manhwa data from API
 async function fetchManhwaInfo(manhwaName) {
@@ -962,9 +964,9 @@ function displayManhwaInfo(data) {
 
 // Save current manhwa to cookies
 function saveToCookies(manhwa) {
-    let cookieManhwas = JSON.parse(getCookie("savedManhwas") || "[]");
+    let cookieManhwas = JSON.parse(getCookie(savedManhwasKey) || "[]");
     cookieManhwas.push(manhwa);
-    document.cookie = `savedManhwas=${JSON.stringify(cookieManhwas)};path=/`;
+    document.cookie = `${savedManhwasKey}=${JSON.stringify(cookieManhwas)};path=/`;
 }
 
 // Get cookie by name
@@ -978,7 +980,7 @@ function getCookie(name) {
 
 // Display saved manhwas from cookies
 function displaySavedManhwas() {
-    const saved = JSON.parse(getCookie("savedManhwas") || "[]");
+    const saved = JSON.parse(getCookie(savedManhwasKey) || "[]");
     alert("Saved Manhwas:\n" + saved.join('\n'));
 }
 
@@ -1011,4 +1013,4 @@ document.getElementById('coverImage').addEventListener('touchend', e => {
 document.getElementById('viewSavedBtn').addEventListener('click', displaySavedManhwas);
 
 // Initial fetch
-fetchManhwaInfo(manhwas[0]);
+fetchManhwaInfo(manhwas[currentIndex]);
